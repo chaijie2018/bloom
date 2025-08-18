@@ -44,7 +44,7 @@ fn rotate_left(num : UInt64, shift : Int) -> UInt64 {
 fn Digest128::bmix_words(
   self : Digest128,
   num1 : UInt64,
-  num2 : UInt64
+  num2 : UInt64,
 ) -> Unit {
   let mut h1 = self.h1
   let mut h2 = self.h2
@@ -78,7 +78,7 @@ fn Digest128::sum128(
   self : Digest128,
   pad_tail : Bool,
   length : UInt,
-  tail : Bytes
+  tail : Bytes,
 ) -> (UInt64, UInt64) {
   let mut h1 = self.h1
   let mut h2 = self.h2
@@ -204,7 +204,7 @@ fn Digest128::new() -> Digest128 {
 //typealias (UInt64, UInt64, UInt64, UInt64) Hash256
 fn Digest128::sum256(
   self : Digest128,
-  data : Bytes
+  data : Bytes,
 ) -> (UInt64, UInt64, UInt64, UInt64) {
   // Process as many bytes as possible.
   self.bmix(data)
