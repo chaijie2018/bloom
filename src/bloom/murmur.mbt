@@ -114,7 +114,7 @@ fn Digest128::sum128(
         k1 = k1 * c2
         h1 = h1 ^ k1
       }
-      ...
+      _ => ()
     }
   }
   let remainder = tail.length() & 15
