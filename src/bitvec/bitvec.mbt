@@ -67,7 +67,7 @@ pub fn BitVector::from(buf : Array[UInt64]) -> BitVector {
 /// Creates a bit vector from an array of integers
 pub fn BitVector::from_with_length(
   ints : Array[UInt64],
-  length : Int
+  length : Int,
 ) -> BitVector {
   if length <= 0 {
     abort("BitVector length must be positive")
@@ -103,12 +103,14 @@ pub fn BitVector::from_string(s : String) -> BitVector {
   let length = s.length()
   let bv = BitVector::new(length)
   for i in 0..<length {
-    if s.char_at(i) == '1' {
-      let word_idx = i >> 6
-      let bit_idx = i & 63
-      bv.data[word_idx] = bv.data[word_idx] | ((1).to_uint64() << bit_idx)
-    } else if s.char_at(i) != '0' {
-      abort("String must contain only '0' and '1' characters")
+    match s.get_char(i).unwrap() {
+      '1' => {
+        let word_idx = i >> 6
+        let bit_idx = i & 63
+        bv.data[word_idx] = bv.data[word_idx] | ((1).to_uint64() << bit_idx)
+      }
+      '0' => ()
+      _ => abort("String must contain only '0' and '1' characters")
     }
   }
   bv
@@ -185,7 +187,7 @@ pub fn BitVector::clear_all(self : BitVector) -> Unit {
 /// Performs bitwise AND operation on bit vectors, returns a new bit vector
 pub fn BitVector::intersection(
   self : BitVector,
-  other : BitVector
+  other : BitVector,
 ) -> BitVector {
   if self.length != other.length {
     abort("BitVectors must have the same length for logical operations")
@@ -217,7 +219,7 @@ pub fn BitVector::union(self : BitVector, other : BitVector) -> BitVector {
 ///|
 pub fn BitVector::inplace_union(
   self : BitVector,
-  other : BitVector
+  other : BitVector,
 ) -> BitVector {
   if self.length != other.length {
     abort("BitVectors must have the same length for logical operations")

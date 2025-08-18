@@ -1,0 +1,55 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "chaijie2018/bloom/bloom"
+
+import(
+  "chaijie2018/bloom/bitvec"
+)
+
+// Values
+fn base_hashes(Bytes) -> (UInt64, UInt64, UInt64, UInt64)
+
+fn estimate_false_positive_rate(Int, Int, Int) -> Double
+
+fn estimate_parameters(Int, Double) -> (Int, Int)
+
+fn locations(Bytes, Int) -> Array[UInt64]
+
+fn new_with_estimates(Int, Double) -> BloomFilter
+
+// Errors
+
+// Types and methods
+pub struct BloomFilter {
+  m : Int
+  k : Int
+  b : @bitvec.BitVector
+}
+fn BloomFilter::add(Self, Bytes) -> Self
+fn BloomFilter::add_string(Self, String) -> Self
+fn BloomFilter::approximated_size(Self) -> Int
+fn BloomFilter::check(Self, Bytes) -> Bool
+fn BloomFilter::check_and_add(Self, Bytes) -> Bool
+fn BloomFilter::check_and_add_string(Self, String) -> Bool
+fn BloomFilter::check_locations(Self, Array[Int]) -> Bool
+fn BloomFilter::check_or_add(Self, Bytes) -> Bool
+fn BloomFilter::check_or_add_string(Self, String) -> Bool
+fn BloomFilter::check_string(Self, String) -> Bool
+fn BloomFilter::clear_all(Self) -> Self
+fn BloomFilter::copy(Self) -> Self raise
+fn BloomFilter::equal(Self, Self) -> Bool
+fn BloomFilter::from(Array[UInt64], Int) -> Self
+fn BloomFilter::from_with_m(Array[UInt64], Int, Int) -> Self
+fn BloomFilter::get_bitvec(Self) -> @bitvec.BitVector
+fn BloomFilter::get_cap(Self) -> Int
+fn BloomFilter::get_k(Self) -> Int
+fn BloomFilter::location(Self, (UInt64, UInt64, UInt64, UInt64), Int) -> Int
+fn BloomFilter::marshal_bytes(Self) -> Bytes
+fn BloomFilter::merge(Self, Self) -> Self raise
+fn BloomFilter::new(Int, Int) -> Self
+fn BloomFilter::unmarshal_bytes(Bytes) -> Self
+
+// Type aliases
+pub typealias @bitvec.BitVector as BitVector
+
+// Traits
+
