@@ -1,5 +1,5 @@
 {
   "import": [
-    "chaijie2018/bloom/bitvec"
+    "chaijie2018/bloom/bloom/internal/bitvec"
   ]
 }
