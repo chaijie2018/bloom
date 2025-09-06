@@ -103,11 +103,11 @@ pub fn BitVector::from_string(s : String) -> BitVector {
   let length = s.length()
   let bv = BitVector::new(length)
   for i in 0..<length {
-    if s.char_at(i) == '1' {
+    if s.get_char(i).unwrap() == '1' {
       let word_idx = i >> 6
       let bit_idx = i & 63
       bv.data[word_idx] = bv.data[word_idx] | ((1).to_uint64() << bit_idx)
-    } else if s.char_at(i) != '0' {
+    } else if s.get_char(i).unwrap() != '0' {
       abort("String must contain only '0' and '1' characters")
     }
   }
