@@ -1,0 +1,49 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "chaijie2018/bloom/bloom/internal/bitvec"
+
+// Values
+fn lowest_unset_bit(UInt64) -> Int
+
+fn trailing_zeros(UInt64) -> Int
+
+// Errors
+
+// Types and methods
+pub(all) struct BitVector {
+  length : Int
+  tail_mask : UInt64
+  data : Array[UInt64]
+}
+fn BitVector::clear(Self, Int) -> Unit
+fn BitVector::clear_all(Self) -> Unit
+fn BitVector::count_ones(Self) -> Int
+fn BitVector::count_zeros(Self) -> Int
+fn BitVector::difference(Self, Self) -> Self
+fn BitVector::equal(Self, Self) -> Bool
+fn BitVector::find_first_set(Self) -> Int
+fn BitVector::flip(Self, Int) -> Unit
+fn BitVector::flip_all(Self) -> Unit
+fn BitVector::from(Array[UInt64]) -> Self
+fn BitVector::from_bools(Array[Bool]) -> Self
+fn BitVector::from_string(String) -> Self
+fn BitVector::from_with_length(Array[UInt64], Int) -> Self
+fn BitVector::get(Self, Int) -> Bool
+fn BitVector::inplace_union(Self, Self) -> Self
+fn BitVector::intersection(Self, Self) -> Self
+fn BitVector::is_all_ones(Self) -> Bool
+fn BitVector::is_all_zeros(Self) -> Bool
+fn BitVector::marshal_bytes(Self) -> Bytes
+fn BitVector::new(Int) -> Self
+fn BitVector::ones(Int) -> Self
+fn BitVector::set(Self, Int) -> Unit
+fn BitVector::to_bools(Self) -> Array[Bool]
+fn BitVector::to_string(Self) -> String
+fn BitVector::union(Self, Self) -> Self
+fn BitVector::unmarshal_bytes(Bytes) -> Self
+impl Eq for BitVector
+impl Show for BitVector
+
+// Type aliases
+
+// Traits
+
