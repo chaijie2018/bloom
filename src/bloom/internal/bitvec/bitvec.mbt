@@ -67,7 +67,7 @@ pub fn BitVector::from(buf : Array[UInt64]) -> BitVector {
 /// Creates a bit vector from an array of integers
 pub fn BitVector::from_with_length(
   ints : Array[UInt64],
-  length : Int
+  length : Int,
 ) -> BitVector {
   if length <= 0 {
     abort("BitVector length must be positive")
@@ -185,7 +185,7 @@ pub fn BitVector::clear_all(self : BitVector) -> Unit {
 /// Performs bitwise AND operation on bit vectors, returns a new bit vector
 pub fn BitVector::intersection(
   self : BitVector,
-  other : BitVector
+  other : BitVector,
 ) -> BitVector {
   if self.length != other.length {
     abort("BitVectors must have the same length for logical operations")
@@ -217,7 +217,7 @@ pub fn BitVector::union(self : BitVector, other : BitVector) -> BitVector {
 ///|
 pub fn BitVector::inplace_union(
   self : BitVector,
-  other : BitVector
+  other : BitVector,
 ) -> BitVector {
   if self.length != other.length {
     abort("BitVectors must have the same length for logical operations")

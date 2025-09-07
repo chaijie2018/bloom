@@ -5,7 +5,7 @@
 /// our own hashing functions. They are designed to be strictly equivalent
 /// to Paolacci's implementation.
 
-///| 
+///|
 let c1 : UInt64 = 0x87c37b91114253d5
 
 ///|
@@ -14,13 +14,15 @@ let c2 : UInt64 = 0x4cf5ad432745937f
 ///|
 let block_size = 16
 
-///| Digest128 represents a partial evaluation of a 128 bits hash.
+///|
+/// Digest128 represents a partial evaluation of a 128 bits hash.
 priv struct Digest128 {
   mut h1 : UInt64 // Unfinalized running hash part 1.
   mut h2 : UInt64 // Unfinalized running hash part 2.
 }
 
-///| bmix will hash blocks (16 bytes)
+///|
+/// bmix will hash blocks (16 bytes)
 fn Digest128::bmix(self : Digest128, bv : Bytes) -> Unit {
   let n = bv.length() / block_size
   for i = 0; i < n; i = i + 1 {
@@ -31,7 +33,8 @@ fn Digest128::bmix(self : Digest128, bv : Bytes) -> Unit {
   }
 }
 
-///| Perform circular left shift on UInt64 numbers
+///|
+/// Perform circular left shift on UInt64 numbers
 fn rotate_left(num : UInt64, shift : Int) -> UInt64 {
   let shift = shift % 64
   if shift == 0 {
@@ -40,11 +43,12 @@ fn rotate_left(num : UInt64, shift : Int) -> UInt64 {
   (num << shift) | (num >> (64 - shift))
 }
 
-///| bmix_words will hash two 64-bit words (16 bytes)
+///|
+/// bmix_words will hash two 64-bit words (16 bytes)
 fn Digest128::bmix_words(
   self : Digest128,
   num1 : UInt64,
-  num2 : UInt64
+  num2 : UInt64,
 ) -> Unit {
   let mut h1 = self.h1
   let mut h2 = self.h2
@@ -78,7 +82,7 @@ fn Digest128::sum128(
   self : Digest128,
   pad_tail : Bool,
   length : UInt,
-  tail : Bytes
+  tail : Bytes,
 ) -> (UInt64, UInt64) {
   let mut h1 = self.h1
   let mut h2 = self.h2
@@ -204,7 +208,7 @@ fn Digest128::new() -> Digest128 {
 //typealias (UInt64, UInt64, UInt64, UInt64) Hash256
 fn Digest128::sum256(
   self : Digest128,
-  data : Bytes
+  data : Bytes,
 ) -> (UInt64, UInt64, UInt64, UInt64) {
   // Process as many bytes as possible.
   self.bmix(data)

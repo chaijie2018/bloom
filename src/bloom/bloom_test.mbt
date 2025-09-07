@@ -16,7 +16,8 @@ test "check_or_add" {
   assert_true(filter1.check_or_add_string("MoonBit"))
 }
 
-///| https://krisives.github.io/bloom-calculator/
+///|
+/// https://krisives.github.io/bloom-calculator/
 test "estimate_parameters" {
   let (m, k) = estimate_parameters(10000, 0.01)
   inspect(m, content="95851")

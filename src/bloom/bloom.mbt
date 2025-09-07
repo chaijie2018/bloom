@@ -34,7 +34,7 @@ pub fn BloomFilter::from(data : Array[UInt64], k : Int) -> BloomFilter {
 pub fn BloomFilter::from_with_m(
   data : Array[UInt64],
   m : Int,
-  k : Int
+  k : Int,
 ) -> BloomFilter {
   { m, k, b: BitVector::from(data) }
 }
@@ -59,7 +59,7 @@ fn location(h : (UInt64, UInt64, UInt64, UInt64), i : Int) -> UInt64 {
 pub fn BloomFilter::location(
   self : BloomFilter,
   hash256 : (UInt64, UInt64, UInt64, UInt64),
-  i : Int
+  i : Int,
 ) -> Int {
   (location(hash256, i) % self.m.to_uint64()).to_int()
 }
@@ -116,7 +116,7 @@ pub fn BloomFilter::add(self : BloomFilter, data : Bytes) -> BloomFilter {
 /// Returns the filter (allows chaining)
 pub fn BloomFilter::add_string(
   self : BloomFilter,
-  data : String
+  data : String,
 ) -> BloomFilter {
   return self.add(data.to_bytes())
 }
@@ -125,7 +125,7 @@ pub fn BloomFilter::add_string(
 /// Merge the data from two Bloom Filters.
 pub fn BloomFilter::merge(
   self : BloomFilter,
-  other : BloomFilter
+  other : BloomFilter,
 ) -> BloomFilter raise {
   // Make sure the m's and k's are the same, otherwise merging has no real use.
   if self.m != other.m {
@@ -172,7 +172,7 @@ pub fn BloomFilter::check_string(self : BloomFilter, data : String) -> Bool {
 /// otherwise.
 pub fn BloomFilter::check_locations(
   self : BloomFilter,
-  locs : Array[Int]
+  locs : Array[Int],
 ) -> Bool {
   for i in 0..<locs.length() {
     if !self.b.get(locs[i] % self.m) {
@@ -203,7 +203,7 @@ pub fn BloomFilter::check_and_add(self : BloomFilter, data : Bytes) -> Bool {
 /// the corresponding bits are still set.
 pub fn BloomFilter::check_and_add_string(
   self : BloomFilter,
-  data : String
+  data : String,
 ) -> Bool {
   self.check_and_add(data.to_bytes())
 }
@@ -228,7 +228,7 @@ pub fn BloomFilter::check_or_add(self : BloomFilter, data : Bytes) -> Bool {
 /// Returns the result of check.
 pub fn BloomFilter::check_or_add_string(
   self : BloomFilter,
-  data : String
+  data : String,
 ) -> Bool {
   self.check_or_add(data.to_bytes())
 }
@@ -261,7 +261,8 @@ pub fn estimate_false_positive_rate(m : Int, k : Int, n : Int) -> Double {
   count.to_double() / rounds.to_double()
 }
 
-///| Approximating the number of items
+///|
+/// Approximating the number of items
 /// https://en.wikipedia.org/wiki/Bloom_filter#Approximating_the_number_of_items_in_a_Bloom_filter
 pub fn BloomFilter::approximated_size(self : BloomFilter) -> Int {
   let x = self.b.count_ones().to_double()
@@ -291,15 +292,13 @@ pub fn BloomFilter::unmarshal_bytes(bytes : Bytes) -> BloomFilter {
 }
 
 ///|
-
-///| Equal tests for the equality of two Bloom filters
+/// Equal tests for the equality of two Bloom filters
 pub fn BloomFilter::equal(self : BloomFilter, other : BloomFilter) -> Bool {
   return self.m == other.m && self.k == other.k && self.b.equal(other.b)
 }
 
 ///|
-
-///| locations returns a list of hash locations representing a data item.
+/// locations returns a list of hash locations representing a data item.
 pub fn locations(data : Bytes, k : Int) -> Array[UInt64] {
   let locs = Array::make(k, 0UL)
   // calculate locations
