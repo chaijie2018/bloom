@@ -275,7 +275,7 @@ pub fn BloomFilter::approximated_size(self : BloomFilter) -> Int {
 ///|
 /// Serialize from BloomFilter to Bytes 
 pub fn BloomFilter::marshal_bytes(self : BloomFilter) -> Bytes {
-  let buf : @buffer.T = @buffer.new()
+  let buf = @buffer.new()
   buf.write_int_le(self.m)
   buf.write_int_le(self.k)
   buf.write_bytes(self.b.marshal_bytes())

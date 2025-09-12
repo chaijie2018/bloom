@@ -355,7 +355,7 @@ pub fn trailing_zeros(x : UInt64) -> Int {
 pub fn BitVector::marshal_bytes(self : BitVector) -> Bytes {
   // Storage capacity occupied by a BitVector struct
   let capacity = 8 * words_needed(self.length) + 12
-  let buf : @buffer.T = @buffer.new(size_hint=capacity)
+  let buf = @buffer.new(size_hint=capacity)
   buf.write_int_le(self.length)
   buf.write_uint64_le(self.tail_mask)
   self.data.iter().each(x => buf.write_uint64_le(x))
