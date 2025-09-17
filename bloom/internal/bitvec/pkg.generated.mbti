@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "chaijie2018/bloom/bloom/internal/bitvec"
+package "chaijie2018/bloom-filter/internal/bitvec"
 
 // Values
 fn lowest_unset_bit(UInt64) -> Int

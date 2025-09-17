@@ -1,9 +1,9 @@
 {
-  "name": "chaijie2018/bloom",
-  "version": "0.1.3",
+  "name": "chaijie2018/bloom-filter",
+  "version": "0.1.4",
   "deps": {},
   "readme": "README.md",
-  "repository": "https://github.com/chaijie2018/bloom",
+  "repository": "https://github.com/chaijie2018/bloom-filter",
   "license": "MIT",
   "keywords": [
     "bloom",
@@ -11,6 +11,6 @@
     "hash",
     "bitvector"
   ],
-  "description": "Bloom Filter",
-  "source": "src"
+  "description": "bloom filter",
+  "source": "bloom"
 }

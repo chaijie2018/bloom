@@ -1,8 +1,8 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "chaijie2018/bloom/bloom"
+package "chaijie2018/bloom-filter"
 
 import(
-  "chaijie2018/bloom/bloom/internal/bitvec"
+  "chaijie2018/bloom-filter/internal/bitvec"
 )
 
 // Values
