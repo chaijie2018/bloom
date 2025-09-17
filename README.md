@@ -1,8 +1,8 @@
-MoonBit Bloom Filter
+Bloom Filter
 -------------
 This bloom filter library inspired by Go's [bloom](https://pkg.go.dev/github.com/bits-and-blooms/bloom/v3) package.
 
-A Bloom filter is a concise/compressed representation of a set, where the main requirement is to make membership queries; _i.e._, whether an item is a member of a set. A Bloom filter will always correctly report the presence of an element in the set when the element is indeed present. A Bloom filter can use much less storage than the original set, but it allows for some 'false positives': it may sometimes report that an element is in the set whereas it is not.
+A bloom filter is a concise/compressed representation of a set, where the main requirement is to make membership queries; _i.e._, whether an item is a member of a set. A Bloom filter will always correctly report the presence of an element in the set when the element is indeed present. A Bloom filter can use much less storage than the original set, but it allows for some 'false positives': it may sometimes report that an element is in the set whereas it is not.
 
 When you construct, you need to know how many elements you have (the desired capacity), and what is the desired false positive rate you are willing to tolerate. A common false-positive rate is 1%. The lower the false-positive rate, the more memory you are going to require. Similarly, the higher the capacity, the more memory you will use. You may construct the Bloom filter capable of receiving 1 million elements with a false-positive rate of 1% in the following manner. 
 
@@ -14,19 +14,19 @@ too small, the false-positive bound might be exceeded. A Bloom filter is not a d
 
 Our implementation accepts keys for setting and testing as `Bytes` or `String`. Thus, to add a string item, `"Hello"`:
 
-```MoonBit
+```moonbit
 filter.add_string("Hello")
 ```
 
 To check if `"Hello"` is in bloom:
 
-```MoonBit
+```moonbit
 filter.check_string("Hello")
 ```
 
 For numerical data:
 
-```MoonBit
+```moonbit
 filter.add((100).to_le_bytes())
 filter.check((100).to_le_bytes())
 ```
@@ -36,27 +36,27 @@ filter.check((100).to_le_bytes())
 Add chaijie2018/bloom to your dependencies:
 ```bash
 moon update
-moon add chaijie2018/bloom
+moon add chaijie2018/bloom-filter
 ```
 
 ## Verifying the False Positive Rate
 
 Sometimes, the actual false positive rate may differ (slightly) from the theoretical false positive rate. We have a function to estimate the false positive rate of a Bloom filter with _m_ bits and _k_ hashing functions for a set of size _n_:
 
-```MoonBit
+```moonbit
 if estimate_false_positive_rate(20*n, 5, n) > 0.001
 ```
 
 You can use it to validate the computed m, k parameters:
 
-```MoonBit
+```moonbit
 let (m, k) = estimate_parameters(n, fp)
 let actual_fp_rate = estimate_false_positive_rate(m, k, n)
 ```
 
 or
 
-```MoonBit
+```moonbit
 let filter = new_with_estimates(n, fp)
 let actual_fp_rate = estimate_false_positive_rate(f.m, f.k, n)
 ```
@@ -75,4 +75,4 @@ Given the particular hashing scheme, it's best to be empirical about this. Note 
 
 ## Contributing
 
-If you wish to contribute to this project, please branch and issue a pull request against master ("[GitHub bloom](https://github.com/chaijie2018/bloom)")
+If you wish to contribute to this project, please branch and issue a pull request against master ("[bloom-filter](https://github.com/chaijie2018/bloom-filter)")
