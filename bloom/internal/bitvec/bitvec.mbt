@@ -370,7 +370,7 @@ pub fn BitVector::unmarshal_bytes(bytes : Bytes) -> BitVector {
   let words_needed = words_needed(length)
   let data = Array::make(words_needed, 0UL)
   for i in 0..<words_needed {
-    data[i] = bytes[12 + i:20 + i].to_uint64_le()
+    data[i] = bytes[12 + i*8:20 + i*8].to_uint64_le()
   }
   { length, tail_mask, data }
 }
