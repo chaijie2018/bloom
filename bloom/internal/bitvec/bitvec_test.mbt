@@ -270,3 +270,12 @@ test "serialization_roundtrip" {
   let deserialized = BitVector::from_string(serialized)
   assert_eq(original.to_string(), deserialized.to_string())
 }
+
+test "marshal_unmarshal_bytes_roundtrip_multiword" {
+  let original = BitVector::ones(128)
+  // Modify the second word so the bug cannot be masked by identical bytes
+  original.clear(64)
+  let serialized = original.marshal_bytes()
+  let deserialized = BitVector::unmarshal_bytes(serialized)
+  assert_eq(original.equal(deserialized), true)
+}

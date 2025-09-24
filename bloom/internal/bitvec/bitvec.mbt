@@ -369,8 +369,10 @@ pub fn BitVector::unmarshal_bytes(bytes : Bytes) -> BitVector {
   let tail_mask = bytes[4:12].to_uint64_le()
   let words_needed = words_needed(length)
   let data = Array::make(words_needed, 0UL)
+  let mut offset = 12
   for i in 0..<words_needed {
-    data[i] = bytes[12 + i:20 + i].to_uint64_le()
+    data[i] = bytes[offset:offset + 8].to_uint64_le()
+    offset += 8
   }
   { length, tail_mask, data }
 }
